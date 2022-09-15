@@ -5,16 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <title>SFM Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/sfm.css">
 </head>
 
 <body>
-    <a href="/users/logout">Logout</a>
-    <h2>Hello
-        <%= user.charAt(0).toUpperCase() + user.slice(1)%>
-    </h2>
 
+    <div class="wrap_chat">
+        <div class="logo">
+            <h2>Welcome
+                <%= user.charAt(0).toUpperCase() + user.slice(1)%>
+            </h2>
+            <a href="/users/logout">Logout</a>
+        </div>
+        <div class="chat">
+            <div class="forma">
+                <form id="form" method="POST" action=" "></form>
+                <input type="text" onkeydown="onKeyDown()" id="message" name="message" autocomplete="false" />
+                <button type="submit">SEND</button>
+                </form>
+            </div>
+
+            <% for(let i = messages.length - 1; i >= 0; i--){ %>
+                <div class="chat-message">
+                    <%=messages[i].timeStamp %>
+                        <%=messages[i].nickname %>
+                            <%=messages[i].message%>
+                </div>
+                <% } %>
+        </div>
+        <div class="onlineUsers">
+            <p>Online Users</p>
+        </div>
+    </div>
 </body>
+<script>
+    window.addEventListener("load", function() {
+        setTimer();
+    });
+
+    let timer = null;
+
+    function setTimer() {
+        if (timer) {
+            clearTimeout(timer);
+        }
+
+        timer = setTimeout(function() {
+            window.location.reload();
+        }, 10000);
+    }
+
+    function onKeyDown() {
+        setTimer();
+    }
+</script>
+<!-- <script src="script.js"></script> -->
 
 </html>
