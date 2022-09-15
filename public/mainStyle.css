@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#name {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: solid 2px #eebba873;
+    padding: 10px 20px;
+    text-align: left;
+}
+
+#email {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: solid 2px #eebba873;
+    padding: 10px 20px;
+    text-align: left;
+}
+
+#password {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: solid 2px #eebba873;
+    padding: 10px 20px;
+    text-align: left;
+}
+
+#password2 {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: solid 2px #eebba873;
+    padding: 10px 20px;
+    text-align: left;
+}
+
+#login {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: solid 2px #2196f329;
+    padding: 10px 20px;
+}
+
+#register {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: solid 2px #2196f329;
+    padding: 10px 30px;
+}
