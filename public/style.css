@@ -18,6 +18,11 @@ body {
     justify-content: center;
 }
 
+.login {
+    height: 200px;
+    text-emphasis-color: white;
+}
+
 .text {
     font-size: 3em;
     padding: 0;
