@@ -9,15 +9,17 @@
     <link rel="stylesheet" type="text/css" href="/sfm.css">
 </head>
 
-<body>
+<body id="body">
 
     <div class="wrap_chat">
         <div class="logo">
-            <h2>Welcome
+            <h2 class="welcome">Welcome
                 <%= user.charAt(0).toUpperCase() + user.slice(1)%>
             </h2>
-            <a href="/users/logout">Logout</a>
+            <br>
+            <a id="logout" href="/users/logout">Logout</a>
         </div>
+
         <div class="chat">
             <div class="forma">
                 <form id="form" method="POST" action=" "></form>

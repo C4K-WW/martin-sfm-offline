@@ -42,6 +42,7 @@ body {
     border: 1px solid green;
     width: 20%;
     height: 90%;
+    color: greenyellow;
     /*background-image: linear-gradient( to bottom, #394848, #2c393a, #2d4344, #131a1a);*/
 }
 
@@ -50,4 +51,24 @@ body {
     height: 10%;
     width: 100%;
     text-align: center;
+}
+
+.welcome {
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    text-shadow: 1px -1px 5px #d8e3e5;
+    font-weight: bold;
+    color: #26272a;
+}
+
+#logout {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.25em;
+}
+
+#logout:hover {
+    color: red;
 }

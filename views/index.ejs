@@ -14,25 +14,24 @@
         <div class="logo">
             <h2 class="text">Share Files Messenger</h2>
         </div>
-        <h2 class="login"><a href="/users/login">Login</a></h2>
-        <!-- <div class="form">
-            <form action="/" method="POST">
-
-                <ul class="list">
-                    <li>
-                        <input type="text" name="nickname" id="name" autocomplete="false" placeholder="nickname" autocomplete="false" />
-                    </li>
-                    <li><button type="submit" class="btn">GO</button></li>
-                </ul>
-            </form>
-        </div>
-        <div class="stats">
-            X: <input type="text" id="sx" /> Y: <input type="text" id="sy" />
-        </div> -->
+        <!-- <h1 id="login"><a href="/users/login">Login</a></h1> -->
+        <form action="/users/login" method="POST">
+            <div>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div>
+                <input type="submit" id="login" value="Login">
+            </div>
+            <br>
+            <a id="reg" href="/users/register">Are you registered?</a>
+        </form>
     </div>
 </body>
+
 <script src="jquery-1.11.0.js"></script>
 <script src="effects.js"></script>
-<!-- <script src="position.js"></script> -->
 
 </html>

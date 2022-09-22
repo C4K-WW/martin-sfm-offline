@@ -53,12 +53,46 @@ app.get("/users/logout", (req, res) => {
     res.redirect("/users/login");
 });
 
+// // Checks whether data is valid, if not set error message
+// // Returns true if valid, false if invalid
+
+// var validateType = {
+//     email: function(el) { // Create email() method
+//         // Rudimentary regular expression that checks for a single @ in the email
+//         var valid = /[^@]+@[^@]+/.test(el.value); // Store result of test in valid
+//         if (!valid) { // If the value of valid is not true
+//             setErrorMessage(el, 'Please enter a valid email'); // Set error message
+//         }
+//         return valid; // Return the valid variable
+//     },
+//     number: function(el) { // Create number() method
+//         var valid = /^\d+$/.test(el.value); // Store result of test in valid
+//         if (!valid) {
+//             setErrorMessage(el, 'Please enter a valid number');
+//         }
+//         return valid;
+//     },
+//     date: function(el) { // Create date() method
+//         // Store result of test in valid
+//         var valid = /^(\d{2}\/\d{2}\/\d{4})|(\d{4}-\d{2}-\d{2})$/.test(el.value);
+//         if (!valid) { // If the value of valid is not true
+//             setErrorMessage(el, 'Please enter a valid date'); // Set error message
+//         }
+//         return valid; // Return the valid variable
+//     }
+// };
+
+// // }());  // End of IIFE
+
 app.post('/users/register', async(req, res) => {
+
+    // let entry = email.toLowerCase();
     let { name, email, password, password2 } = req.body;
-    console.log({ name, email, password, password2 });
+    const entry = email.toLowerCase();
+    console.log({ name, entry, password, password2 });
     let errors = [];
 
-    if (!name || !email || !password || !password2) {
+    if (!name || !entry || !password || !password2) {
         errors.push({ message: "Please enter all fields" });
     }
 
