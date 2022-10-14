@@ -24,3 +24,24 @@ git remote rename origin old-origin
 git remote add origin git@gitlab.code4000.internal:martink1/sfm-offline.git
 git push -u origin --all
 git push -u origin --tags
+
+// next tasks
+
+Hello Taylor,
+
+I hope you are well and busy coding :)
+
+I managed to do some of the thigs you suggested. I can now send a message which displays 
+in both the terminal and Chrome. Ilja suggested I do the below in order to create a sessionID 
+like environment so only the two people in the dialog will be able to speak. I do not intend to save
+the conversation in a DB. I just want to have a simple messenger which has a file share option with formidable.
+
+Best regards,
+
+Martin
+
+1) in ejs, generate dialogId like this: User1.id + User2.id, getting smth like 'max@code4000.org-martin@code4000.org'
+2) send it with input, name to '/messages/ max@code4000.org-martin@code4000.org'
+3) from server (POST request '/messages/:dialogId') get dialogID from params, 
+4) and split it back to  'max@code4000.org' and 'martin@code4000.org'.
+5) Check if user.id is one of them.
