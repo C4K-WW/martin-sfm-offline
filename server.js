@@ -1,12 +1,17 @@
 const express = require("express");
 const app = express();
+// const path = require('path');
 const { pool } = require("./dbConfig");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const flash = require("express-flash");
 const passport = require("passport");
-
+const cookieParser = require("cookie-parser");
+const http = require("http");
+const formidable = require("formidable");
+const fs = require("fs");
 const initializePassport = require("./passportConfig");
+
 initializePassport(passport);
 
 const PORT = process.env.PORT || 4000;
@@ -24,15 +29,45 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(flash()); // to display flash messages
 
-// set the different pages req's
+app.use(cookieParser());
+
+
+// history of messages
+
+let history = [];
+
+app.post('/messages', (req, res) => {
+    let text = req.body.message
+    history.push(text)
+    console.log(text)
+    res.render("chat-dashboard", { user: req.user.name, history: history });
+});
+
+// generate dialogId
+
+app.post('/messages: dialogID', (req, res) => {
+    let dialogID = user1.id + user2.id;
+    user1.id = req.user1.name;
+    user2.id = req.user2.name;
+    console.log(dialogID);
+    res.render("dialogID")
+
+})
+
+// create an upload form to share files with formidable
+
+
+
+// set the different pages requirements
 
 app.get("/", (req, res) => {
     res.render("index") // res.send("Hello");
+
 });
 
 app.get("/users/register", checkAuthenticated, (req, res) => {
@@ -43,8 +78,9 @@ app.get("/users/login", checkAuthenticated, (req, res) => {
     res.render("login");
 });
 
-app.get("/users/dashboard", checkNotAuthenticated, (req, res) => {
-    res.render("dashboard", { user: req.user.name });
+app.get("/users/chat-dashboard", checkNotAuthenticated, (req, res) => {
+    res.render("chat-dashboard", { user: req.user.name, history: history });
+    // res.download("server.js")
 });
 
 app.get("/users/logout", (req, res) => {
@@ -53,43 +89,11 @@ app.get("/users/logout", (req, res) => {
     res.redirect("/users/login");
 });
 
-// // Checks whether data is valid, if not set error message
-// // Returns true if valid, false if invalid
-
-// var validateType = {
-//     email: function(el) { // Create email() method
-//         // Rudimentary regular expression that checks for a single @ in the email
-//         var valid = /[^@]+@[^@]+/.test(el.value); // Store result of test in valid
-//         if (!valid) { // If the value of valid is not true
-//             setErrorMessage(el, 'Please enter a valid email'); // Set error message
-//         }
-//         return valid; // Return the valid variable
-//     },
-//     number: function(el) { // Create number() method
-//         var valid = /^\d+$/.test(el.value); // Store result of test in valid
-//         if (!valid) {
-//             setErrorMessage(el, 'Please enter a valid number');
-//         }
-//         return valid;
-//     },
-//     date: function(el) { // Create date() method
-//         // Store result of test in valid
-//         var valid = /^(\d{2}\/\d{2}\/\d{4})|(\d{4}-\d{2}-\d{2})$/.test(el.value);
-//         if (!valid) { // If the value of valid is not true
-//             setErrorMessage(el, 'Please enter a valid date'); // Set error message
-//         }
-//         return valid; // Return the valid variable
-//     }
-// };
-
-// // }());  // End of IIFE
-
 app.post('/users/register', async(req, res) => {
 
-    // let entry = email.toLowerCase();
     let { name, email, password, password2 } = req.body;
-    const entry = email.toLowerCase();
-    console.log({ name, entry, password, password2 });
+    const entry = email.toLowerCase(); // all emails should be lower case
+    // console.log({ name, entry, password, password2 });
     let errors = [];
 
     if (!name || !entry || !password || !password2) {
@@ -110,7 +114,7 @@ app.post('/users/register', async(req, res) => {
         // Form validation has passed
 
         let hashedPassword = await bcrypt.hash(password, 10);
-        console.log(hashedPassword);
+        // console.log(hashedPassword);
 
         pool.query(
             `SELECT * FROM users WHERE email = $1`, [email], (err, results) => {
@@ -143,28 +147,25 @@ app.post('/users/register', async(req, res) => {
 });
 
 app.post("/users/login", passport.authenticate("local", {
-        successRedirect: "/users/dashboard",
-        failureRedirect: "/users/login",
-        failureFlash: true
-    })
-
-);
+    successRedirect: "/users/chat-dashboard",
+    failureRedirect: "/users/login",
+    failureFlash: true
+}));
 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        return (res.redirect("/users/dashboard"));
+        return (res.redirect("/users/chat-dashboard"));
     }
     next();
-}
+};
 
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        return next()
+        return next();
     }
-
     res.redirect("/users/login");
-}
+};
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}...`);
 });

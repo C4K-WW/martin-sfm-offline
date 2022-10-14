@@ -1,7 +1,5 @@
 const messages = require("../data/messages");
 
-
-
 function timez() {
     let time = new Date();
     let h = time.getHours();

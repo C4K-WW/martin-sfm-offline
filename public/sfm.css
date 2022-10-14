@@ -30,6 +30,13 @@ body {
     /*linear-gradient( to bottom, #1b2236, #243156, #212e54, #0c1120);*/
 }
 
+.history {
+    /* width: 80%;
+    height: 90%; */
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 #message {
     width: 80%;
     border: 1px solid red;
@@ -54,19 +61,21 @@ body {
 }
 
 .welcome {
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 0;
     margin: 0;
     width: auto;
     text-shadow: 1px -1px 5px #d8e3e5;
     font-weight: bold;
     color: #26272a;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 #logout {
     text-decoration: none;
     color: #fff;
-    font-size: 1.25em;
+    font-size: medium;
 }
 
 #logout:hover {

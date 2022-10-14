@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SFM Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/sfm.css">
+</head>
+
+<body id="body">
+
+    <div class="wrap_chat">
+        <div class="logo">
+            <h2 class="welcome">Welcome
+                <%= user.charAt(0).toUpperCase() + user.slice(1)%>
+            </h2>
+            <a id="logout" href="/users/logout">Logout</a>
+        </div>
+
+        <div class="chat">
+
+            <div class="form">
+
+                <div class="history">
+
+                    <p style="color: white">
+
+                        <% for (let i =0; i < history.length; i++) { %>
+                            <%= history[i] %>
+                                <br>
+                                <% } %>
+                    </p>
+
+                </div>
+
+                <form id="form" method="POST" action="/messages">
+
+                    <input type="text" id="message" name="message" autocomplete="false" />
+                    <button type="submit">SEND</button>
+                    <input type="file" id="sharing" name="upload" placeholder="Upload" />
+
+                </form>
+
+            </div>
+
+        </div>
+        <div class="onlineUsers">
+            <p>Online Users</p>
+        </div>
+    </div>
+
+</body>
+
+
+
+</html>
